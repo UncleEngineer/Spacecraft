@@ -39,7 +39,7 @@ class Game:
         self.all_sprites = pygame.sprite.Group()
         self.map = Map(self, 3000, 3000)
         self.camera = Camera(self.map.width, self.map.height)
-        self.player = Spaceship(self, 750, 1500)
+        self.player = Spaceship(self, self.map.width/2, self.map.height/2)
         # start music
         pygame.mixer.music.play(-1)
 

@@ -26,6 +26,6 @@ MOON_IMG = "moon.png"
 BG_MUSIC = "space.flac"
 
 # Spaceship settings
-ACC = 20
+ACC = 10
 ROT_SPEED = 300
 MAX_SPEED = 500

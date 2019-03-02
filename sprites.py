@@ -19,7 +19,7 @@ class Spaceship(pygame.sprite.Sprite):
     def get_keys(self):
         self.rot_speed = 0
         # 마찰력
-        self.vel *= 0.998
+        self.vel *= 0.996
         keys = pygame.key.get_pressed()
         if keys[pygame.K_LEFT]:
             self.rot_speed = ROT_SPEED
@@ -57,7 +57,7 @@ class Spaceship(pygame.sprite.Sprite):
         '''
 
 class Planet(pygame.sprite.Sprite):
-    def __init__(self, game, image, x, y, rot_speed, width, height, orbit_to = None, orbit_speed = None):
+    def __init__(self, game, image, x, y, rot_speed, width, height):
         # too much things to optimize here..
         self.groups = game.all_sprites
         super().__init__(self.groups)
@@ -70,11 +70,6 @@ class Planet(pygame.sprite.Sprite):
         self.rot = 0
         self.rot_speed = rot_speed
         self.pos = pygame.math.Vector2(x, y)
-        self.orbit_to = orbit_to
-        self.orbit_speed = orbit_speed
-        if self.orbit_to and self.orbit_speed:
-            self.radius = self.pos.distance_to(self.orbit_to.pos)
-            self.theta = self.pos.angle_to(self.orbit_to.pos)
 
     def update(self):
         self.ori_rect = self.rect
@@ -82,15 +77,35 @@ class Planet(pygame.sprite.Sprite):
         self.image = pygame.transform.rotate(self.ori_img, self.rot)
         self.rect = self.image.get_rect()
         self.rect.center = self.ori_rect.center
-        if self.orbit_to and self.orbit_speed:
-            # this code is seriously hard to understand
-            # this code use 삼각함수 to get next position of circle movement
-            x = self.radius * math.cos(self.theta) + self.orbit_to.rect.centerx
-            y = self.radius * math.sin(self.theta) + self.orbit_to.rect.centery
-            self.rect.centerx = x
-            self.rect.centery = y
-            # have to change theta (angle of trangle to orbit planet)
-            self.theta = (self.theta + self.orbit_speed * self.game.dt) % 360
 
+class Planet_orbit(pygame.sprite.Sprite):
+    # planet that orbit to other planet
+    def __init__(self, game, image, rot_speed, width, height, orbit_to, orbit_speed, distance_to, theta):
+        # too much things to optimize here..
+        self.groups = game.all_sprites
+        super().__init__(self.groups)
+        self.game = game
+        self.image = pygame.transform.scale(image, (width, height))
+        self.ori_img = self.image
+        self.rect = self.image.get_rect()
+        self.rot = 0
+        self.rot_speed = rot_speed
+        self.orbit_to = orbit_to
+        self.orbit_speed = orbit_speed
+        self.radius = distance_to
+        self.theta = theta
 
-        # by the way there is one little annoying bug at almost after 360 of orbit image just rollback... idk why..
+    def update(self):
+        self.ori_rect = self.rect
+        self.rot = (self.rot + self.rot_speed * self.game.dt) % 360
+        self.image = pygame.transform.rotate(self.ori_img, self.rot)
+        self.rect = self.image.get_rect()
+        self.rect.center = self.ori_rect.center
+
+        # this code use 삼각함수 to get next x and y position of circle movement
+        x = self.radius * math.cos(self.theta) + self.orbit_to.rect.centerx
+        y = self.radius * math.sin(self.theta) + self.orbit_to.rect.centery
+        self.rect.centerx = x
+        self.rect.centery = y
+        # have to change theta (angle of trangle to orbit planet)
+        self.theta = (self.theta + self.orbit_speed * self.game.dt) % 360
