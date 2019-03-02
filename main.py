@@ -37,7 +37,7 @@ class Game:
     def new(self):
         # one group, map, camera, player
         self.all_sprites = pygame.sprite.Group()
-        self.map = Map(self, 3000, 3000)
+        self.map = Map(self, 2000, 2000)
         self.camera = Camera(self.map.width, self.map.height)
         self.player = Spaceship(self, self.map.width/2, self.map.height/2)
         # start music

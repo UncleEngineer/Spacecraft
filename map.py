@@ -27,5 +27,5 @@ class Map:
     def gen_planets(self):
         # for this game because there is only one map and three object just put everything here, but not recommend for complex map such as tilemap
             sun = Planet(self.game, self.game.sun_img, self.width/2, self.height/2, 3, 500, 500)
-            earth = Planet_orbit(self.game, self.game.earth_img, -10, 200, 200, sun, 0.1, 500, 150)
+            earth = Planet_orbit(self.game, self.game.earth_img, -10, 200, 200, sun, 0.1, 700, 150)
             moon = Planet_orbit(self.game, self.game.moon_img, 36, 50, 50, earth, 1, 150, 150)
