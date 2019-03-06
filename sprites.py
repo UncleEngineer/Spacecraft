@@ -43,19 +43,6 @@ class Spaceship(pygame.sprite.Sprite):
         self.pos += self.vel * self.game.dt
         self.rect.center = self.pos
 
-        # i was tried to making player always keep in screen
-        # but this code is bug somehow player stuck in edge of screen
-        '''
-        if self.rect.centerx > self.game.map.width:
-            self.rect.centerx = 0
-        elif  self.rect.centery > self.game.map.height:
-            self.rect.centery = 0
-        elif  self.rect.centerx < 0:
-            self.rect.centerx = self.game.map.width
-        elif  self.rect.centery < 0:
-            self.rect.centery = self.game.map.height
-        '''
-
 class Planet(pygame.sprite.Sprite):
     def __init__(self, game, image, x, y, rot_speed, width, height):
         # too much things to optimize here..

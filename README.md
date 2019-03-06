@@ -8,5 +8,4 @@
 
 ## Screenshot
 
-![screenshot1](https://raw.githubusercontent.com/jinwho/Spacecraft/master/screenshot/screenshot1.PNG)
-![screenshot2](https://raw.githubusercontent.com/jinwho/Spacecraft/master/screenshot/screenshot2.PNG)
+![screenshot1](https://raw.githubusercontent.com/jinwho/Spacecraft/master/screenshot.PNG)
