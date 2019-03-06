@@ -5,14 +5,8 @@ from settings import *
 from sprites import *
 from os import path
 
-#Thanks to Tatermand for Magnificent Planet Arts : https://opengameart.org/content/space-game-art-pack-extended
-#Thanks to Kenney for Nice Spaceship : https://opengameart.org/content/space-shooter-redux
-#Thanks to lasercheese for Amazing piano music : https://opengameart.org/content/space-orchestral
-
 class Game:
     def __init__(self):
-        # Most codes here from KidsCanCode, awesome game developer and good teacher
-        # you can checkout his channel : https://www.youtube.com/channel/UCNaPQ5uLX5iIEHUCLmfAgKg
         pygame.init()
         self.screen = pygame.display.set_mode((WIDTH, HEIGHT))
         pygame.display.set_caption(TITLE)
